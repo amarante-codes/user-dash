@@ -44,6 +44,7 @@ v1_wd = v1_wd.sort_values("asset")
 v2_uu = pd.read_csv('data/volt02_uu.csv', index_col=0, parse_dates=True)
 v2_uu.index = pd.to_datetime(v2_uu['date'], format = '%Y-%m-%d') # indicate date format from csv
 v2_uu.drop_duplicates(keep='first',inplace=True)
+v2_uu["count"] = v2_uu.groupby(["asset"])["count"].transform(np.cumsum)
 
 # Load volt02 avg transaction size data
 v2_ts = pd.read_csv('data/volt02_ts.csv', index_col=0)
