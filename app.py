@@ -22,7 +22,7 @@ import time
 v1_uu = pd.read_csv('data/volt01_uu.csv', index_col=0, parse_dates=True)
 v1_uu.index = pd.to_datetime(v1_uu['date'], format = '%Y-%m-%d') # indicate date format from csv
 v1_uu.drop_duplicates(keep='first',inplace=True)
-v1_uu = v1_uu.cumsum()
+v1_uu = v1_uu.fillna(0).cumsum()
 
 # Load volt01 avg transaction size data
 v1_ts = pd.read_csv('data/volt01_ts.csv', index_col=0)
@@ -42,7 +42,7 @@ v1_wd = v1_wd.sort_values("asset")
 v2_uu = pd.read_csv('data/volt02_uu.csv', index_col=0, parse_dates=True)
 v2_uu.index = pd.to_datetime(v2_uu['date'], format = '%Y-%m-%d') # indicate date format from csv
 v2_uu.drop_duplicates(keep='first',inplace=True)
-v2_uu = v2_uu.cumsum()
+v2_uu = v2_uu.fillna(0).cumsum()
 
 # Load volt02 avg transaction size data
 v2_ts = pd.read_csv('data/volt02_ts.csv', index_col=0)
