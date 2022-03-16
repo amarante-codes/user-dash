@@ -14,6 +14,7 @@ from dash.dependencies import Input, Output, State
 
 from datetime import datetime
 import time
+import numpy as np
 
 
 #---------VOLT 01 DATA -------------
@@ -22,6 +23,8 @@ import time
 v1_uu = pd.read_csv('data/volt01_uu.csv', index_col=0, parse_dates=True)
 v1_uu.index = pd.to_datetime(v1_uu['date'], format = '%Y-%m-%d') # indicate date format from csv
 v1_uu.drop_duplicates(keep='first',inplace=True)
+v1_uu["count"] = v1_uu.groupby(["asset"])["count"].transform(np.cumsum)
+v1_uu = v1_uu.loc[~(v1_uu.asset=="DGLN")]
 
 # Load volt01 avg transaction size data
 v1_ts = pd.read_csv('data/volt01_ts.csv', index_col=0)
@@ -81,7 +84,7 @@ app.layout = html.Div(
                 children=[
                     html.Div(className='four columns div-user-controls',
                             children=[
-                                html.H2('FRIKTION VOLT UNIQUE USERS'),
+                                html.H2('FRIKTION VOLT CUMULATIVE UNIQUE USERS'),
                                 html.P('Time Series of Unique Users since launch.'),
                                 html.P('Select Volt & pick one or more asset from the dropdown.'),
                                 html.Div([dcc.Tabs(parent_className='custom-tabs',
