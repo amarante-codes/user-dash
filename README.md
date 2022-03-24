@@ -9,7 +9,7 @@
   - Per Volt and asset
 - Deposits and withdrawal bars (and net line) per asset
   - Per Volt and epoch
-[ ] Distribution of users in Assets
+- Distribution of users in Assets
 - Wallet share
   - % of users wallet (measured in notional (USDC) or underlying asset) deposited into Friktion Volt
 - (low priority) Protocol revenue (fees generated) vs time
